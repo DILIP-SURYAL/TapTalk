@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_END_POINT } from "../constant";
+import { setUserData } from "../redux/userSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -11,24 +13,27 @@ const Login = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post(`${API_END_POINT}/api/auth/login`, {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        `${API_END_POINT}/api/auth/login`,
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
 
       console.log("Login success:", res?.data);
       setError("");
 
-      // Optional: Save token to localStorage or context
-      // localStorage.setItem("token", res.data.token);
-
-      // Navigate to home/dashboard
-      // navigate("/home");
+      dispatch(setUserData(res?.data));
+      navigate("/");
     } catch (e) {
       console.error(e);
       const msg =

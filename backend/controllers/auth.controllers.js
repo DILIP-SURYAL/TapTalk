@@ -26,14 +26,14 @@ export const signup = async (req, res) => {
 
     const token = await generateToken(user._id);
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      sameSite: "Strict",
-      secure: false,
-    });
-
-    return res.status(201).json(user);
+    return res
+      .cookie("token", token, {
+        httpOnly: true, // recommended for security
+        secure: process.env.NODE_ENV === "production", // set true in production
+        sameSite: "Lax", // or 'Strict' / 'None' depending on use case
+      })
+      .status(201)
+      .json(user);
   } catch (e) {
     console.log(e);
   }
@@ -55,14 +55,14 @@ export const login = async (req, res) => {
     }
     const token = await generateToken(user._id);
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      sameSite: "strict",
-      secure: false,
-    });
-
-    return res.status(201).json({ message: "logged in Successfully", user });
+    return res
+      .cookie("token", token, {
+        httpOnly: true, // recommended for security
+        secure: process.env.NODE_ENV === "production", // set true in production
+        sameSite: "Lax", // or 'Strict' / 'None' depending on use case
+      })
+      .status(201)
+      .json({ message: "logged in Successfully", user });
   } catch (e) {
     console.log(e);
   }
