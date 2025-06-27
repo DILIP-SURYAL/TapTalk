@@ -6,6 +6,7 @@ import authRouter from "./routes/auth.routes.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import userRouter from "./routes/user.routes.js";
+import messageRouter from "./routes/message.routes.js";
 
 // Load environment variables
 console.log("Cloudinary ENV:", {
@@ -34,7 +35,7 @@ app.use(cookieParser());
 // Routes
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
-
+app.use("/api/message", messageRouter);
 // Start server
 app
   .listen(PORT, () => {
