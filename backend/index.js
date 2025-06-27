@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import connectDb from "./config/db.js";
 import authRouter from "./routes/auth.routes.js";
@@ -7,8 +8,11 @@ import cors from "cors";
 import userRouter from "./routes/user.routes.js";
 
 // Load environment variables
-dotenv.config({ path: ".env" });
-
+console.log("Cloudinary ENV:", {
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 // Connect to MongoDB
 connectDb().catch((err) => {
   console.error("Failed to connect to MongoDB:", err);
@@ -30,9 +34,6 @@ app.use(cookieParser());
 // Routes
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
-app.get("/", (req, res) => {
-  res.send("api is working");
-});
 
 // Start server
 app

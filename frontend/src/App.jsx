@@ -3,12 +3,13 @@ import "./App.css";
 import Login from "./Pages/Login.jsx";
 import Signup from "./Pages/Signup.jsx";
 import useCurrentUser from "./customHooks/useCurrentUser.jsx";
+import useGetOtherUsers from "./customHooks/useGetOtherUsers.jsx";
 import Home from "./Pages/Home.jsx";
 import Profile from "./Pages/Profile.jsx";
 
 function App() {
   const { userData, loading } = useCurrentUser();
-
+  useGetOtherUsers();
   if (loading) {
     return <div className="loading-screen">Loading...</div>;
   }
