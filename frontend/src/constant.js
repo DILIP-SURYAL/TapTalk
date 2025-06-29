@@ -1,1 +1,2 @@
-export const API_END_POINT = "http://localhost:8000";
+export const API_END_POINT =
+  "https://taptalk-realtimechat-backend.onrender.com";
