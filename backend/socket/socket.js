@@ -6,7 +6,7 @@ let app = express();
 const server = http.createServer(app);
 export const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL,
+    origin: "https://taptalk-realtimechatapp.onrender.com",
     credentials: true, // ✅ allow credentials
   },
 });

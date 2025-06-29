@@ -24,7 +24,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middlewares
 const corsOptions = {
-  origin: process.env.CLIENT_URL,
+  origin: "https://taptalk-realtimechatapp.onrender.com",
   credentials: true,
 };
 app.use(cors(corsOptions));
