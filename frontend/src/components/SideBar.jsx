@@ -113,7 +113,7 @@ const SideBar = ({ onClose }) => {
             </button>
             <div className="flex gap-3">
               {otherUsers
-                ?.filter((user) => onlineUsers.includes(user._id))
+                ?.filter((user) => onlineUsers?.includes(user._id))
                 .slice(0, 6)
                 .map((user) => (
                   <div

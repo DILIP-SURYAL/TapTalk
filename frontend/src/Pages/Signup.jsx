@@ -21,14 +21,13 @@ const Signup = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        `${API_END_POINT}/api/auth/signup`,
+        `${API_END_POINT}a/api/uth/signup`,
         { userName, email, password },
         { withCredentials: true }
       );
 
       setError("");
       dispatch(setUserData(res?.data));
-      navigate("/login");
     } catch (err) {
       const msg =
         err?.response?.data?.message || "Signup failed. Please try again.";
