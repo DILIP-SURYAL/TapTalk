@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setLoading, setOtherUsers } from "../redux/userSlice";
+import { API_END_POINT } from "../constant";
 
-const API_END_POINT = "http://localhost:8000"; // your actual endpoint
+// your actual endpoint
 
 const useCurrentUser = () => {
   const dispatch = useDispatch();
