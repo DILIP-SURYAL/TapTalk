@@ -90,7 +90,7 @@ const SideBar = ({ onClose }) => {
         {/* Profile Info */}
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h2 className="text-xl lg:text-2xl font-bold">chatly</h2>
+            <h2 className="text-xl lg:text-2xl font-bold">Taptalk</h2>
             <p className="text-sm lg:text-base mt-1">
               Hi, {userData?.name || userData?.userName || "User"}
             </p>

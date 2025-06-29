@@ -103,7 +103,7 @@ const MessageArea = ({ onOpenSidebar }) => {
           >
             <FiMenu size={24} />
           </button>
-          <h1 className="ml-3 text-lg font-semibold">Chatly</h1>
+          <h1 className="ml-3 text-lg font-semibold">Taptalk</h1>
         </div>
 
         {/* Welcome content */}
@@ -115,7 +115,7 @@ const MessageArea = ({ onOpenSidebar }) => {
               className="w-24 h-24 sm:w-32 sm:h-32 mx-auto opacity-60 mb-6"
             />
             <h2 className="text-xl sm:text-2xl font-bold mb-2">
-              Welcome to Chatly 👋
+              Welcome to Taptalk 👋
             </h2>
             <p className="text-gray-500 text-sm sm:text-base">
               Select a user from the sidebar to start chatting.

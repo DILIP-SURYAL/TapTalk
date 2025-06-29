@@ -41,7 +41,7 @@ const Login = () => {
         {/* Header */}
         <div className="bg-cyan-400 h-36 md:h-40 flex items-center justify-center rounded-b-3xl shadow-md">
           <h1 className="text-xl md:text-2xl font-bold text-gray-700">
-            Welcome to <span className="text-white">chatly</span>
+            Welcome to <span className="text-white">Taptalk</span>
           </h1>
         </div>
 
