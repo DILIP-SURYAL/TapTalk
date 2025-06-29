@@ -13,6 +13,7 @@ import { API_END_POINT } from "./constant.js";
 import { setOnlineUsers, setSocket } from "./redux/userSlice.js";
 import { SocketContext } from "./socket/socket.js";
 import { setMessages } from "./redux/messageSlice.js";
+import LoadingScreen from "./components/LoadingScreen.jsx";
 function App() {
   const { userData } = useCurrentUser();
   const { loading } = useSelector((state) => state.user);
@@ -49,7 +50,7 @@ function App() {
   }, [userData, dispatch]);
 
   if (loading) {
-    return <div className="loading-screen">Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (
