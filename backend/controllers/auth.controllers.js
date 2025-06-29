@@ -29,8 +29,8 @@ export const signup = async (req, res) => {
     return res
       .cookie("token", token, {
         httpOnly: true, // recommended for security
-        secure: process.env.NODE_ENV === "production", // set true in production
-        sameSite: "Lax", // or 'Strict' / 'None' depending on use case
+        secure: true, // set true in production
+        sameSite: "None", // or 'Strict' / 'None' depending on use case
       })
       .status(201)
       .json(user);
@@ -58,8 +58,8 @@ export const login = async (req, res) => {
     return res
       .cookie("token", token, {
         httpOnly: true, // recommended for security
-        secure: process.env.NODE_ENV === "production", // set true in production
-        sameSite: "Lax", // or 'Strict' / 'None' depending on use case
+        secure: true, // set true in production
+        sameSite: "None", // or 'Strict' / 'None' depending on use case
       })
       .status(201)
       .json({ message: "logged in Successfully", user });
