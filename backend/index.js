@@ -23,11 +23,16 @@ connectDb().catch((err) => {
 const PORT = process.env.PORT || 3000;
 
 // Middlewares
-const corsOptions = {
-  origin: "https://taptalk-realtimechatapp.onrender.com",
-  credentials: true,
-};
-app.use(cors(corsOptions));
+
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173", // dev
+      "https://taptalk-realtimechatapp.onrender.com", // deployed frontend
+    ],
+    credentials: true,
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
