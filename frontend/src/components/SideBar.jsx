@@ -170,7 +170,7 @@ const SideBar = ({ onClose }) => {
                   alt={user.name}
                   className="w-12 h-12 rounded-full"
                 />
-                {onlineUsers.includes(user._id) && (
+                {onlineUsers?.includes(user._id) && (
                   <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full" />
                 )}
               </div>
@@ -178,7 +178,7 @@ const SideBar = ({ onClose }) => {
                 <p className="font-medium text-gray-800 truncate">
                   {user.name || user.userName || "Unknown"}
                 </p>
-                {onlineUsers.includes(user._id) && (
+                {onlineUsers?.includes(user._id) && (
                   <span className="text-green-600 text-sm">Online</span>
                 )}
               </div>
