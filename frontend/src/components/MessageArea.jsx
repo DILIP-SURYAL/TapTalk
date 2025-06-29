@@ -158,6 +158,7 @@ const MessageArea = ({ onOpenSidebar }) => {
           alt={selectedUser.name}
           className="w-10 h-10 rounded-full mr-3 border-2 border-white/30 shadow-md"
         />
+
         <div className="flex-1 min-w-0">
           <h2 className="text-white text-base lg:text-lg font-semibold truncate">
             {selectedUser.name || selectedUser.userName}
@@ -165,13 +166,13 @@ const MessageArea = ({ onOpenSidebar }) => {
         </div>
       </div>
 
-      {/* Messages List - Use viewport height calculation */}
+      {/* Messages List */}
       <div
         className="overflow-y-auto bg-gray-50 p-4"
         style={{
-          height: "calc(100vh - 64px - 80px)", // viewport height - header - input
-          minHeight: "calc(100vh - 64px - 80px)",
-          maxHeight: "calc(100vh - 64px - 80px)",
+          height: "calc(100vh - 64px - 90px)", // viewport height - header - input
+          minHeight: "calc(100vh - 64px - 90px)",
+          maxHeight: "calc(100vh - 64px - 90px)",
         }}
       >
         {messages.length ? (
@@ -237,21 +238,20 @@ const MessageArea = ({ onOpenSidebar }) => {
         </>
       )}
 
-      {/* Input Area - Fixed position with explicit height */}
-      <div
-        className="absolute bottom-2 left-0 right-0 bg-white border-t border-gray-200 p-4 z-20"
-        style={{ height: "90px" }}
-      >
-        <form onSubmit={handleSend} className="flex items-center gap-3 h-full">
+      {/* Input Area - Fixed with proper space allocation */}
+      <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3 z-20">
+        <form onSubmit={handleSend} className="flex items-center gap-2">
+          {/* Emoji Button */}
           <button
             type="button"
-            className="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100 transition shrink-0"
+            className="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100 transition flex-shrink-0"
             onClick={() => setShowEmojiPicker((v) => !v)}
           >
             <FiSmile size={20} />
           </button>
 
-          <label className="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100 transition cursor-pointer shrink-0">
+          {/* Image Upload Button */}
+          <label className="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100 transition cursor-pointer flex-shrink-0">
             <FiImage size={20} />
             <input
               type="file"
@@ -261,20 +261,22 @@ const MessageArea = ({ onOpenSidebar }) => {
             />
           </label>
 
+          {/* Text Input - with proper constraints */}
           <input
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Type a message…"
-            className="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:border-[#03A9F4] focus:ring-1 focus:ring-[#03A9F4] outline-none bg-white text-base"
+            className="flex-1 min-w-0 px-4 py-2.5 rounded-full border border-gray-300 focus:border-[#03A9F4] focus:ring-1 focus:ring-[#03A9F4] outline-none bg-white text-base"
             disabled={loading}
             style={{ fontSize: "16px" }} // Prevents zoom on iOS
           />
 
+          {/* Send Button - always visible */}
           <button
             type="submit"
             disabled={loading || (!message.trim() && !backendImage)}
-            className="bg-[#03A9F4] text-white p-3 rounded-full shadow-lg hover:bg-[#0288D1] disabled:opacity-50 disabled:cursor-not-allowed transition shrink-0"
+            className="bg-[#03A9F4] text-white p-2.5 rounded-full shadow-lg hover:bg-[#0288D1] disabled:opacity-50 disabled:cursor-not-allowed transition flex-shrink-0 min-w-[44px] min-h-[44px] flex items-center justify-center"
           >
             {loading ? (
               <FcProcess size={18} className="animate-spin" />
