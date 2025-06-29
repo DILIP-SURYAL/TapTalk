@@ -22,7 +22,8 @@ const SideBar = ({ onClose }) => {
     (state) => state.user
   );
 
-  const handleLogout = async () => {
+  const handleLogout = async (e) => {
+    e.preventDefault();
     try {
       await axios.post(
         `${API_END_POINT}/api/auth/logout`,
