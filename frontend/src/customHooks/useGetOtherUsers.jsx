@@ -1,37 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setOtherUsers, setUserData } from "../redux/userSlice";
+import { setLoading, setOtherUsers } from "../redux/userSlice";
 
 const API_END_POINT = "http://localhost:8000"; // your actual endpoint
 
 const useCurrentUser = () => {
   const dispatch = useDispatch();
-  const { userData, otherUsers } = useSelector((state) => state.user);
-  const [loading, setLoading] = useState(true);
+  const { userData } = useSelector((state) => state.user);
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchOtherUsers = async () => {
       try {
+        dispatch(setLoading(true));
+
         const response = await axios.get(`${API_END_POINT}/api/user/others`, {
           withCredentials: true,
         });
-        dispatch(setOtherUsers(response.data));
+
+        dispatch(setOtherUsers(response?.data));
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching other users:", error);
       } finally {
-        setLoading(false);
+        dispatch(setLoading(false));
       }
     };
 
-    if (!userData) {
-      fetchUser();
-    } else {
-      setLoading(false);
+    // ✅ Only fetch if current user is available
+    if (userData?._id) {
+      fetchOtherUsers();
     }
   }, [dispatch, userData]);
 
-  return { userData, loading };
+  return { userData };
 };
 
 export default useCurrentUser;

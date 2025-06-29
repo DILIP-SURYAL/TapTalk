@@ -56,3 +56,24 @@ export const getOtherUsers = async (req, res) => {
     return res.status(500).json({ message: "erron in getOtherUsers", e });
   }
 };
+
+export const searchUsers = async (req, res) => {
+  try {
+    let { query } = req.query;
+    if (!query) {
+      return res.status(400).json({ message: "Query parameter is required" });
+    }
+
+    const response = await User.find({
+      $or: [
+        { name: { $regex: query, $options: "i" } },
+        { userName: { $regex: query, $options: "i" } },
+      ],
+    });
+
+    return res.status(200).json(response);
+  } catch (e) {
+    console.log("problem in searchUsers", e);
+    return res.status(500).json({ message: "erron in getOtherUsers", e });
+  }
+};

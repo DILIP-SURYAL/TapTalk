@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import userRouter from "./routes/user.routes.js";
 import messageRouter from "./routes/message.routes.js";
+import { app, server } from "./socket/socket.js";
 
 // Load environment variables
 console.log("Cloudinary ENV:", {
@@ -19,7 +20,6 @@ connectDb().catch((err) => {
   console.error("Failed to connect to MongoDB:", err);
 });
 
-const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middlewares
@@ -37,7 +37,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/message", messageRouter);
 // Start server
-app
+server
   .listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   })

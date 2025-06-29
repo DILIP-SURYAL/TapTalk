@@ -2,21 +2,20 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_END_POINT } from "../constant";
-import { setUserData } from "../redux/userSlice";
-import { useDispatch } from "react-redux";
+import { setLoading, setUserData } from "../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-  const navigate = useNavigate();
+  const { loading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    dispatch(setLoading(true));
     try {
       const res = await axios.post(
         `${API_END_POINT}/api/auth/login`,
@@ -32,15 +31,14 @@ const Login = () => {
       console.log("Login success:", res?.data);
       setError("");
 
-      dispatch(setUserData(res?.data));
-      navigate("/");
+      dispatch(setUserData(res?.data.user));
     } catch (e) {
       console.error(e);
       const msg =
         e?.response?.data?.message || "Login failed. Please try again.";
       setError(msg);
     } finally {
-      setLoading(false);
+      dispatch(setLoading(false));
     }
   };
 

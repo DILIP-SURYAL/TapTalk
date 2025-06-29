@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setUserData } from "../redux/userSlice";
+import { setLoading, setUserData } from "../redux/userSlice";
 
 const API_END_POINT = "http://localhost:8000"; // your actual endpoint
 
 const useCurrentUser = () => {
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.user.userData);
-  const [loading, setLoading] = useState(true);
+  const { userData } = useSelector((state) => state.user);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
+        dispatch(setLoading(true));
         const response = await axios.get(`${API_END_POINT}/api/user/current`, {
           withCredentials: true,
         });
@@ -20,7 +20,7 @@ const useCurrentUser = () => {
       } catch (error) {
         console.error("Error fetching user data:", error);
       } finally {
-        setLoading(false);
+        dispatch(setLoading(false));
       }
     };
 
@@ -31,7 +31,7 @@ const useCurrentUser = () => {
     }
   }, [dispatch, userData]);
 
-  return { userData, loading };
+  return { userData };
 };
 
 export default useCurrentUser;
