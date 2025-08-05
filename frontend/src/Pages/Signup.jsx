@@ -21,7 +21,7 @@ const Signup = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        `${API_END_POINT}/api/uth/signup`,
+        `${API_END_POINT}/api/auth/signup`,
         { userName, email, password },
         { withCredentials: true }
       );
